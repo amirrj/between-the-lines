@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://amirj:Heskey14@between-the-lines-db-1q2ja.mongodb.net/db?retryWrites=true&w=majority",
+  "jwt_secret": "btl_secret"
+}
