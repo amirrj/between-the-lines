@@ -4,9 +4,19 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 62.5%;
+  background-color: var(--color-faded);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+:root {
+  --color-green: #5cb85c;
+  --color-black: #292b2c;
+  --color-faded: #f7f7f7;
+  --color-white: #ffffff;
+  --color-blue: #0275d8;
+  --color-red: #d9534f;
 }
