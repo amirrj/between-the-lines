@@ -26,6 +26,62 @@ export const loadUser = () => (dispatch, getState) => {
     });
 };
 
+// Authenticate user
+export const authenticateUser = (user, history) => (dispatch) => {
+  // USER LOADING
+  dispatch({ type: USER_LOADING });
+
+  // add headers
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  // authenicate user
+  axios
+    .post('/api/auth', user, config)
+    .then((res) => {
+      dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+
+      history.push('/home');
+    })
+    .catch((err) => {
+      dispatch(returnErrors(err.response.data));
+      dispatch({ type: LOGIN_FAIL });
+    });
+};
+
+// register user
+export const registerUser = (user, history) => (dispatch) => {
+  // USER LOADING
+  dispatch({ type: USER_LOADING });
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  // register user
+  axios
+    .post('/api/users', user, config)
+    .then((res) => {
+      dispatch({ type: REGISTER_SUCCESS, payload: res.data });
+
+      history.push('/home');
+    })
+    .catch((err) => {
+      dispatch(returnErrors(err.response.data));
+      dispatch({ type: REGISTER_FAIL });
+    });
+};
+
+// logout user
+export const logoutUser = () => (dispatch) => {
+  dispatch({ type: LOGOUT_SUCCESS });
+};
+
 // Setup config/headers and token
 export const tokenConfig = (getState) => {
   // Get token from localStorage

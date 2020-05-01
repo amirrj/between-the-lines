@@ -3,6 +3,8 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const auth = require('../../middleware/auth');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+const config = require('config');
 
 const validateRegister = require('../../validation/register');
 const User = require('../../models/User');
@@ -36,16 +38,26 @@ router.post('/', (req, res) => {
         if (err) throw err;
         newUser.password = hash;
         newUser.save().then((user) => {
-          res.json({
-            User: {
-              firstName: user.firstName,
-              lastName: user.lastName,
-              email: user.email,
-              password: user.password,
-              topics_following: user.topics_following,
-              register_date: user.register_date,
+          jwt.sign(
+            { id: user.id },
+            config.get('jwt_secret'),
+            {
+              expiresIn: 3600,
             },
-          });
+            (err, token) => {
+              res.json({
+                token,
+                User: {
+                  firstName: user.firstName,
+                  lastName: user.lastName,
+                  email: user.email,
+                  password: user.password,
+                  topics_following: user.topics_following,
+                  register_date: user.register_date,
+                },
+              });
+            }
+          );
         });
       });
     });
@@ -67,8 +79,11 @@ router.post('/topic', auth, async (req, res) => {
       res.status(400).json({ msg: 'No user found, token may be invalid' });
     }
 
+    // change to lowercase before adding into database
+    const LCTopic = topic.toLowerCase();
+
     const newTopic = {
-      topic,
+      topic: LCTopic,
     };
 
     try {

@@ -3,6 +3,11 @@ const mongoose = require('mongoose');
 const config = require('config');
 
 const app = express();
+app.use(
+  express.urlencoded({
+    extended: false,
+  })
+);
 app.use(express.json());
 
 const db = config.get('mongoURI');

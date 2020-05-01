@@ -19,7 +19,7 @@ const Auth = (props) => {
         src={LogoImage}
         alt="Between the lines logo"
       />
-      <AuthForm authType={authType} />
+      <AuthForm history={props.history} authType={authType} />
     </div>
   );
 };

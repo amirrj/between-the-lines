@@ -1,0 +1,33 @@
+.home {
+  background-color: var(--color-faded);
+  color: var(--color-black);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.home__logo {
+  width: 15rem;
+  margin-top: 2rem;
+}
+
+.home__title {
+  text-transform: uppercase;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.home__text {
+  font-size: 1rem;
+  margin: 1rem;
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .home {
+    width: 50%;
+    margin: 0 auto;
+  }
+}

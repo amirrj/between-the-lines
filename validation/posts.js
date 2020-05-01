@@ -18,8 +18,8 @@ const postsValidation = (data) => {
 
   if (isEmpty(data.description)) {
     errors.description = 'Description field is required';
-  } else if (!validator.isLength(data.description, { max: 50 })) {
-    errors.description = 'Description is too long. max 50 characters';
+  } else if (!validator.isLength(data.description, { max: 150 })) {
+    errors.description = 'Description is too long. max 150 characters';
   }
 
   if (isEmpty(data.article)) {

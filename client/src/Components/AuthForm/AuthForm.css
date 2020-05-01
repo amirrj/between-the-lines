@@ -20,6 +20,7 @@
 
 .authForm__header {
   padding: 0.8rem;
+  margin: 1.7rem 0;
   color: var(--color-white);
   background-color: var(--color-black);
   font-size: 2rem;
@@ -35,6 +36,12 @@
   font-size: 1.2rem;
   margin: auto;
   width: 80%;
+}
+
+.authForm__input-error {
+  color: var(--color-red);
+  font-size: 1rem;
+  margin: 0;
 }
 
 .authForm__input-label {
@@ -63,6 +70,7 @@
 
 .authForm__text {
   font-size: 1rem;
+  margin: 1rem 0;
 }
 
 .authForm__text-link {

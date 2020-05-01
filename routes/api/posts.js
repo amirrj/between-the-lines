@@ -29,13 +29,17 @@ router.post('/', auth, async (req, res) => {
       .json({ msg: 'Could not get user from token, Token may be invalid' });
   }
 
+  // change topic to lowercase
+  const topic = req.body.topic;
+  const lowerCaseTopic = topic.toLowerCase();
+
   const newPost = new Post({
     title: req.body.title,
     description: req.body.description,
     article: req.body.article,
     image: req.body.image,
     image_caption: req.body.image_caption,
-    topics: req.body.topics,
+    topics: lowerCaseTopic,
     author: {
       user_id: author.id,
       firstName: author.firstName,
@@ -49,7 +53,7 @@ router.post('/', auth, async (req, res) => {
     .catch((err) => console.log(err));
 });
 
-// @route DELETE /api/posts/postid
+// @route DELETE /api/posts/:postid
 // @desc delete a post
 // @access private
 router.delete('/:postid', auth, (req, res) => {
@@ -85,20 +89,53 @@ router.get('/', auth, async (req, res) => {
 
   await Post.find({ topics: { $in: userTopics } })
     .sort({ post_date: -1 })
-    .then((posts) => res.json(posts));
-});
-
-// @route GET /api/posts/:userid
-// @desc get all posts from single user
-// @access private
-router.get('/:userid', auth, async (req, res) => {
-  const id = req.params.userid;
-
-  await Post.find({ 'author.user_id': id })
-    .sort({ post_date: 1 })
     .then((posts) => {
       res.json(posts);
-    });
+    })
+    .catch((err) =>
+      res.status(400).json({ msg: 'Something went wrong, please try again' })
+    );
+});
+
+// @route GET /api/posts/user
+// @desc get all posts from single user
+// @access private
+router.get('/user', auth, async (req, res) => {
+  // find author
+  const findAuthor = (id) => {
+    return User.findById(id).exec();
+  };
+
+  const author = await findAuthor(req.user.id);
+
+  if (!author) {
+    return res
+      .status(401)
+      .json({ msg: 'Could not get user from token, Token may be invalid' });
+  }
+
+  Post.find({ 'author.user_id': author.id }).then((posts) => {
+    res.json(posts);
+  });
+});
+
+// @route GET /api/posts/post/:postid
+// @desc get single post by id
+// @access private
+router.get('/post/:postid', auth, (req, res) => {
+  const id = req.params.postid;
+
+  Post.findById(id)
+    .then((post) => {
+      if (!post) {
+        return res.status(404).json({ msg: 'No post found' });
+      }
+
+      res.json({ post });
+    })
+    .catch((err) =>
+      res.status(400).json({ msg: 'Something went wrong, please try again' })
+    );
 });
 
 module.exports = router;

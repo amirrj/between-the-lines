@@ -1,0 +1,36 @@
+.loading {
+  position: relative;
+}
+
+.loading__logo {
+  width: 15rem;
+  position: absolute;
+  top: 10vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loader {
+  border: 10px solid #f3f3f3; /* Light grey */
+  border-top: 10px solid var(--color-green);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 60vh;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(30deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

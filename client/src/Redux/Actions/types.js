@@ -1,8 +1,10 @@
 // Posts types
 export const GET_POSTS_BY_TOPICS = 'GET_POSTS_BY_TOPICS';
 export const GET_POSTS_BY_USER = 'GET_POSTS_BY_USER';
+export const GET_POST = 'GET_POST';
 export const CREATE_POST = 'CREATE_POST';
 export const DELETE_POST = 'DELETE_POST';
+export const POSTS_LOADING = 'POSTS_LOADING';
 
 // auth types
 export const USER_LOADING = 'USER_LOADING';
