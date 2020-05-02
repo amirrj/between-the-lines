@@ -33,10 +33,13 @@ router.post('/', auth, async (req, res) => {
   const topic = req.body.topic;
   const lowerCaseTopic = topic.toLowerCase();
 
+  const article = req.body.article;
+  const displayArticle = article.split('\n');
+
   const newPost = new Post({
     title: req.body.title,
     description: req.body.description,
-    article: req.body.article,
+    article: displayArticle,
     image: req.body.image,
     image_caption: req.body.image_caption,
     topics: lowerCaseTopic,
@@ -134,7 +137,7 @@ router.get('/post/:postid', auth, (req, res) => {
       res.json({ post });
     })
     .catch((err) =>
-      res.status(400).json({ msg: 'Something went wrong, please try again' })
+      res.status(400).json({ msg: 'Could not get post, please try again' })
     );
 });
 

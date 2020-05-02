@@ -11,7 +11,7 @@ const PostSchema = new Schema({
     required: true,
   },
   article: {
-    type: String,
+    type: Array,
     required: true,
   },
   image: {

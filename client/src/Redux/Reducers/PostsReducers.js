@@ -35,7 +35,8 @@ const PostsReducer = (state = initialState, action) => {
     case GET_POST:
       return {
         ...state,
-        post: action.payload,
+        post: action.payload.post,
+        postsLoading: false,
       };
     case CREATE_POST:
       return {

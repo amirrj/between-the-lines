@@ -9,6 +9,7 @@ import { loadUser } from './Redux/Actions/AuthActions';
 import Landing from './Pages/Landing/Landing';
 import Auth from './Pages/Auth/Auth';
 import Home from './Pages/Home/Home';
+import Post from './Pages/Post/Post';
 
 function App() {
   useEffect(() => {
@@ -24,6 +25,7 @@ function App() {
             <Route path="/auth" component={Auth} exact />
             <Route path="/register" component={Auth} exact />
             <PrivateRoute path="/home" component={Home} exact />
+            <PrivateRoute path="/post/:postid" component={Post} exact />
           </Switch>
         </Router>
       </div>
