@@ -1,3 +1,0 @@
-create posts actions 
-move get posts by topics into post action
-test and design home page
