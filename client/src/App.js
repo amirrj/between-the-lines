@@ -10,6 +10,7 @@ import Landing from './Pages/Landing/Landing';
 import Auth from './Pages/Auth/Auth';
 import Home from './Pages/Home/Home';
 import Post from './Pages/Post/Post';
+import MyArticles from './Pages/MyArticles/MyArticles';
 
 function App() {
   useEffect(() => {
@@ -26,6 +27,7 @@ function App() {
             <Route path="/register" component={Auth} exact />
             <PrivateRoute path="/home" component={Home} exact />
             <PrivateRoute path="/post/:postid" component={Post} exact />
+            <PrivateRoute path="/myarticles" component={MyArticles} exact />
           </Switch>
         </Router>
       </div>

@@ -41,14 +41,12 @@ const PostsReducer = (state = initialState, action) => {
     case CREATE_POST:
       return {
         ...state,
-        usersPosts: [action.payload, ...state.usersPosts],
+        posts: [action.payload, ...state.posts],
       };
     case DELETE_POST:
       return {
         ...state,
-        usersPosts: state.usersPosts.filter(
-          (post) => post.id !== action.payload.id
-        ),
+        posts: state.posts.filter((post) => post._id !== action.payload.id),
       };
     default:
       return state;

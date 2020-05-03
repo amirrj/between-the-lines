@@ -1,32 +1,20 @@
-.home {
+.myArticles {
   background-color: var(--color-faded);
   color: var(--color-black);
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+  margin-bottom: 2rem;
 }
 
-.home__logo {
+.myArticles__logo {
   width: 15rem;
   margin-top: 2rem;
 }
 
-.home__title {
-  text-transform: uppercase;
-  font-weight: 600;
-  text-align: center;
-  margin-top: 1rem;
-}
-
-.home__text {
-  font-size: 1rem;
-  margin: 1rem;
-  text-align: center;
-}
-
 @media (min-width: 768px) {
-  .home {
+  .myArticles {
     width: 80%;
     margin: 0 auto;
   }

@@ -64,7 +64,7 @@ router.delete('/:postid', auth, (req, res) => {
 
   Post.findByIdAndDelete(id, (err, post) => {
     if (err) throw err;
-    res.json({ deleted: post });
+    res.json(post);
   });
 });
 
@@ -117,9 +117,11 @@ router.get('/user', auth, async (req, res) => {
       .json({ msg: 'Could not get user from token, Token may be invalid' });
   }
 
-  Post.find({ 'author.user_id': author.id }).then((posts) => {
-    res.json(posts);
-  });
+  Post.find({ 'author.user_id': author.id })
+    .sort({ post_date: -1 })
+    .then((posts) => {
+      res.json(posts);
+    });
 });
 
 // @route GET /api/posts/post/:postid

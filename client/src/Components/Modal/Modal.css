@@ -1,0 +1,87 @@
+.backdrop {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--color-white);
+  border: 2px solid black;
+  height: 12rem;
+  width: 80%;
+  border-radius: 10px;
+
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__header {
+  height: 30%;
+  position: relative;
+}
+
+.modal__header-close {
+  font-size: 1rem;
+  font-family: sans-serif;
+  position: absolute;
+  right: 1rem;
+  top: 30%;
+  cursor: pointer;
+}
+
+.modal__body {
+  height: 40%;
+  border-top: 1px solid var(--color-black);
+  border-bottom: 1px solid var(--color-black);
+  padding: 1rem 2rem;
+}
+
+.modal__footer {
+  height: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal__footer-button {
+  margin: 0 0.5rem;
+  font-family: inherit;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0 1rem;
+  text-transform: uppercase;
+}
+
+.modal__footer-button-cancel {
+  border: 3px solid var(--color-blue);
+  color: var(--color-blue);
+}
+
+.modal__footer-button-delete {
+  border: 3px solid var(--color-red);
+  color: var(--color-red);
+}
+
+@media (min-width: 768px) {
+  .modal {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .modal {
+    width: 30%;
+  }
+}

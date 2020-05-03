@@ -56,6 +56,35 @@
   right: 0.5rem;
 }
 
+.postCard__edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.postCard__edit-button {
+  text-decoration: none;
+  margin: 0 1rem;
+  width: 5rem;
+  font-weight: 300;
+  font-size: 1rem;
+  font-family: inherit;
+  text-align: center;
+  background-color: transparent;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.postCard__edit-button--edit {
+  color: var(--color-orange);
+  border: 2px solid var(--color-orange);
+}
+
+.postCard__edit-button--delete {
+  color: var(--color-red);
+  border: 2px solid var(--color-red);
+}
+
 @media (min-width: 768px) {
   .postCard {
     display: flex;

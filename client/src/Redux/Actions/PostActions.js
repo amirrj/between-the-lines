@@ -5,6 +5,7 @@ import {
   GET_POSTS_BY_USER,
   GET_POST,
   POSTS_LOADING,
+  DELETE_POST,
 } from './types';
 import { returnErrors, clearErrors } from './ErrorActions';
 
@@ -36,7 +37,7 @@ export const getPostsByUser = (id) => (dispatch, getState) => {
   dispatch({ type: POSTS_LOADING });
 
   axios
-    .get(`/api/posts/${id}`, tokenConfig(getState))
+    .get(`/api/posts/user`, tokenConfig(getState))
     .then((res) => {
       dispatch({ type: GET_POSTS_BY_USER, payload: res.data });
     })
@@ -58,6 +59,22 @@ export const getPost = (id) => (dispatch, getState) => {
     .get(`/api/posts/post/${id}`, tokenConfig(getState))
     .then((res) => {
       dispatch({ type: GET_POST, payload: res.data });
+    })
+    .catch((err) => {
+      dispatch(returnErrors(err.response.data));
+    });
+};
+
+// delete post
+export const deletePost = (id) => (dispatch, getState) => {
+  // clear all errors
+  dispatch(clearErrors());
+
+  // delete post
+  axios
+    .delete(`/api/posts/${id}`, tokenConfig(getState))
+    .then((res) => {
+      dispatch({ type: DELETE_POST, payload: res.data });
     })
     .catch((err) => {
       dispatch(returnErrors(err.response.data));
