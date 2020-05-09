@@ -31,11 +31,11 @@ const Home = (props) => {
         />
         <h1 className="home__title">Recent Articles</h1>
         {posts.length ? (
-          <PostCard />
+          <PostCard posts={posts} />
         ) : (
           <p className="home__text">
-            No posts to display. To see posts please head over to topics and
-            find some of your favourite interests.
+            No articles to display. To see articles please head over to topics
+            and find some of your favourite interests.
           </p>
         )}
       </div>

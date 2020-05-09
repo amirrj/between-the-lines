@@ -12,9 +12,9 @@ const Modal = (props) => {
           </p>
         </div>
         <div className="modal__body">
-          <h1 className="modal__body-title">
+          <h3 className="modal__body-title">
             Are you sure you wish to delete this article? ({props.post.title})
-          </h1>
+          </h3>
         </div>
         <div className="modal__footer">
           <button

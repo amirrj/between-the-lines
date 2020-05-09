@@ -1,13 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import './PostCard.css';
 
 const PostCard = (props) => {
-  const posts = useSelector((state) => state.posts.posts);
-
-  const postCard = posts.map((post) => {
+  const postCard = props.posts.map((post) => {
     return (
       <React.Fragment key={post._id}>
         <Link to={`/post/${post._id}`} className="postCard">

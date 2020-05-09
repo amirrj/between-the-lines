@@ -6,6 +6,7 @@ import {
   GET_POST,
   POSTS_LOADING,
   DELETE_POST,
+  GET_ALL_POSTS,
 } from './types';
 import { returnErrors, clearErrors } from './ErrorActions';
 
@@ -44,6 +45,22 @@ export const getPostsByUser = (id) => (dispatch, getState) => {
     .catch((err) => {
       dispatch(returnErrors(err.response.data));
     });
+};
+
+export const getAllPosts = () => (dispatch, getState) => {
+  // clear errors
+  dispatch(clearErrors());
+
+  // set postsloading to true
+  dispatch({ type: POSTS_LOADING });
+
+  // get all posts
+  axios
+    .get('/api/posts/all', tokenConfig(getState))
+    .then((res) => {
+      dispatch({ type: GET_ALL_POSTS, payload: res.data });
+    })
+    .catch((err) => dispatch(returnErrors(err.response.data)));
 };
 
 // get single post to display

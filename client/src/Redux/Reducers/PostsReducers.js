@@ -1,6 +1,7 @@
 import {
   GET_POSTS_BY_TOPICS,
   GET_POSTS_BY_USER,
+  GET_ALL_POSTS,
   GET_POST,
   CREATE_POST,
   DELETE_POST,
@@ -27,6 +28,12 @@ const PostsReducer = (state = initialState, action) => {
         postsLoading: false,
       };
     case GET_POSTS_BY_USER:
+      return {
+        ...state,
+        posts: action.payload,
+        postsLoading: false,
+      };
+    case GET_ALL_POSTS:
       return {
         ...state,
         posts: action.payload,

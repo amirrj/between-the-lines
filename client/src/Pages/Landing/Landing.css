@@ -1,7 +1,7 @@
 .landing {
   text-align: center;
   color: #292b2c;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .landing__logo {
@@ -12,7 +12,7 @@
 .landing__title {
   font-size: 1.8rem;
   font-weight: 400;
-  margin: 2rem 0;
+  margin: 1rem 0;
 }
 
 .landing__topics {
@@ -50,7 +50,7 @@
 }
 
 .landing__text {
-  margin-top: 5rem;
+  margin-top: 2rem;
   margin-bottom: 1.2rem;
   font-size: 1rem;
   font-weight: 400;
@@ -73,7 +73,7 @@
   text-decoration: none;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .landing__title {
     font-size: 3.5rem;
   }

@@ -33,11 +33,15 @@ router.post('/', auth, async (req, res) => {
   const topic = req.body.topic;
   const lowerCaseTopic = topic.toLowerCase();
 
+  // change title to lowercase
+  const title = req.body.title;
+  const lowerCaseTitle = title.toLowerCase();
+
   const article = req.body.article;
   const displayArticle = article.split('\n');
 
   const newPost = new Post({
-    title: req.body.title,
+    title: lowerCaseTitle,
     description: req.body.description,
     article: displayArticle,
     image: req.body.image,
@@ -118,6 +122,17 @@ router.get('/user', auth, async (req, res) => {
   }
 
   Post.find({ 'author.user_id': author.id })
+    .sort({ post_date: -1 })
+    .then((posts) => {
+      res.json(posts);
+    });
+});
+
+//  @route GET /api/posts/all
+// @desc get all posts
+// @access private
+router.get('/all', auth, async (req, res) => {
+  Post.find()
     .sort({ post_date: -1 })
     .then((posts) => {
       res.json(posts);
