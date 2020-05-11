@@ -6,6 +6,7 @@
   align-items: center;
   min-height: 100vh;
   margin-bottom: 2rem;
+  margin-top: 5rem;
 }
 
 .myArticles__logo {
@@ -42,5 +43,6 @@
   .myArticles {
     width: 80%;
     margin: 0 auto;
+    margin-top: 5rem;
   }
 }

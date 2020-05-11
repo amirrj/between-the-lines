@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPostsByUser, deletePost } from '../../Redux/Actions/PostActions';
 
-import LogoImage from '../../Assets/Between-the-lines-full-logo-2.png';
+import Navigation from '../../Components/Navigation/Navigation';
 import PostCard from '../../Components/PostCard/PostCard';
 import Loading from '../../Components/Helpers/Loading/Loading';
 import Modal from '../../Components/Modal/Modal';
@@ -42,28 +42,26 @@ const MyArticles = (props) => {
     userLoading || postsLoading ? (
       <Loading />
     ) : (
-      <div className="myArticles">
-        <img
-          className="myArticles__logo"
-          src={LogoImage}
-          alt="between the lines logo"
-        />
-        <h1 className="myArticles__title">My Articles</h1>
-        <Link className="myArticles__button">Write your own story</Link>
-        {posts.length ? (
-          <React.Fragment>
-            <PostCard posts={posts} edit openModal={openModalHandler} />
-            <Modal
-              isOpen={isOpen}
-              post={postToDelete}
-              closeModal={closeModalHandler}
-              deletePost={deletePostHander}
-            />{' '}
-          </React.Fragment>
-        ) : (
-          <p className="myArticles__text">No articles to display.</p>
-        )}
-      </div>
+      <React.Fragment>
+        <Navigation />
+        <div className="myArticles">
+          <h1 className="myArticles__title">My Articles</h1>
+          <Link className="myArticles__button">Write your own story</Link>
+          {posts.length ? (
+            <React.Fragment>
+              <PostCard posts={posts} edit openModal={openModalHandler} />
+              <Modal
+                isOpen={isOpen}
+                post={postToDelete}
+                closeModal={closeModalHandler}
+                deletePost={deletePostHander}
+              />{' '}
+            </React.Fragment>
+          ) : (
+            <p className="myArticles__text">No articles to display.</p>
+          )}
+        </div>
+      </React.Fragment>
     );
 
   return display;

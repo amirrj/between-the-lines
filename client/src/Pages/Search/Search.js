@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllPosts } from '../../Redux/Actions/PostActions';
 
-import LogoImage from '../../Assets/Between-the-lines-full-logo-2.png';
+import Navigation from '../../Components/Navigation/Navigation';
 import Loading from '../../Components/Helpers/Loading/Loading';
 import PostCard from '../../Components/PostCard/PostCard';
 import './Search.css';
@@ -30,22 +30,20 @@ const Search = (props) => {
     userLoading || postsLoading ? (
       <Loading />
     ) : (
-      <div className="search">
-        <img
-          className="search__logo"
-          src={LogoImage}
-          alt="between the lines logo"
-        />
-        <h1 className="search__title">Search Articles</h1>
-        <input
-          className="search__input"
-          type="text"
-          onChange={onChangeHandler}
-          value={input}
-          placeholder="Search by title"
-        />
-        <PostCard posts={displayPosts} />
-      </div>
+      <React.Fragment>
+        <Navigation />
+        <div className="search">
+          <h1 className="search__title">Search Articles</h1>
+          <input
+            className="search__input"
+            type="text"
+            onChange={onChangeHandler}
+            value={input}
+            placeholder="Search by title"
+          />
+          <PostCard posts={displayPosts} />
+        </div>
+      </React.Fragment>
     );
 
   return display;

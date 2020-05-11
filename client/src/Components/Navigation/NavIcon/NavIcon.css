@@ -1,0 +1,41 @@
+.navIcon,
+.navIcon-close {
+  height: 2rem;
+  width: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-right: 1rem;
+  position: relative;
+}
+
+.navIcon__icon {
+  width: 2rem;
+  height: 0.2rem;
+  background-color: var(--color-black);
+  border-radius: 2px;
+}
+
+.navIcon-close .navIcon__icon:first-child,
+.navIcon-close .navIcon__icon:last-child {
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+}
+
+.navIcon-close .navIcon__icon:first-child {
+  transform: rotate(45deg);
+}
+
+.navIcon-close .navIcon__icon:last-child {
+  transform: rotate(-45deg);
+}
+
+@media (min-width: 768px) {
+  .navIcon,
+  .navIcon-close {
+    display: none;
+  }
+}

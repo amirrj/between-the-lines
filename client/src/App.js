@@ -29,11 +29,7 @@ function App() {
             <PrivateRoute path="/home" component={Home} exact />
             <PrivateRoute path="/post/:postid" component={Post} exact />
             <PrivateRoute path="/myarticles" component={MyArticles} exact />
-            <PrivateRoute
-              path="/searcharticles"
-              component={SearchArticles}
-              exact
-            />
+            <PrivateRoute path="/search" component={SearchArticles} exact />
           </Switch>
         </Router>
       </div>

@@ -1,0 +1,32 @@
+.nav {
+  position: absolute;
+  right: 1%;
+}
+
+.nav__list {
+}
+
+.nav__list-item {
+  text-decoration: none;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  color: var(--color-black);
+}
+
+.nav__list-item:hover {
+  background-color: var(--color-green);
+  color: var(--color-white);
+}
+
+@media (min-width: 1024px) {
+  .nav {
+    position: absolute;
+    right: 15%;
+  }
+}
+
+@media (max-width: 767px) {
+  .nav {
+    display: none;
+  }
+}

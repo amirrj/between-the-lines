@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPost } from '../../Redux/Actions/PostActions';
 
-import LogoImage from '../../Assets/Between-the-lines-full-logo-2.png';
+import Navigation from '../../Components/Navigation/Navigation';
 import Loading from '../../Components/Helpers/Loading/Loading';
 
 import './Post.css';
@@ -34,37 +34,35 @@ const Post = (props) => {
     postLoading || userLoading ? (
       <Loading />
     ) : (
-      <div className="post">
-        <img
-          className="post__logo"
-          src={LogoImage}
-          alt="between the lines logo"
-        />
-        <div className="post__header">
-          <h1 className="post__header-title">{post.title}</h1>
-          <p className="post__header-desc">{post.description}</p>
-          <p className="post__header-topic">Topic: {post.topics}</p>
-          {post.author ? (
-            <p className="post__header-author">
-              Written by {post.author.firstName} {post.author.lastName} <br />
-              On {displayDate}
-            </p>
-          ) : null}
+      <React.Fragment>
+        <Navigation />
+        <div className="post">
+          <div className="post__header">
+            <h1 className="post__header-title">{post.title}</h1>
+            <p className="post__header-desc">{post.description}</p>
+            <p className="post__header-topic">Topic: {post.topics}</p>
+            {post.author ? (
+              <p className="post__header-author">
+                Written by {post.author.firstName} {post.author.lastName} <br />
+                On {displayDate}
+              </p>
+            ) : null}
+          </div>
+          <div className="post__image">
+            <img
+              className="post__image-image"
+              src={post.image}
+              alt={`between the lines - ${post.topics}`}
+            />
+            <p className="post__image-caption">{post.image_caption}</p>
+          </div>
+          <div className="post__article">
+            {displayArticle}
+            <br />
+            <hr />
+          </div>
         </div>
-        <div className="post__image">
-          <img
-            className="post__image-image"
-            src={post.image}
-            alt={`between the lines - ${post.topics}`}
-          />
-          <p className="post__image-caption">{post.image_caption}</p>
-        </div>
-        <div className="post__article">
-          {displayArticle}
-          <br />
-          <hr />
-        </div>
-      </div>
+      </React.Fragment>
     );
 
   return display;

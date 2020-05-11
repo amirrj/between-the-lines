@@ -5,6 +5,7 @@
 
   background-color: var(--color-faded);
   min-height: 100vh;
+  margin-top: 5rem;
 }
 
 .search__logo {
@@ -30,4 +31,12 @@
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 768px) {
+  .search {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 5rem;
+  }
 }
