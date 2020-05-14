@@ -4,14 +4,27 @@ import { Link } from 'react-router-dom';
 import './Nav.css';
 
 const Nav = (props) => {
-  const navList = ['Home', 'Topics', 'Search', 'MyArticles'];
+  const navList = ['Home', 'Topics', 'Search', 'MyArticles', 'Logout'];
 
   const displayNavList = navList.map((i) => {
-    return (
-      <Link to={`/${i}`} key={i} className="nav__list-item">
-        {i}
-      </Link>
-    );
+    if (i === 'Logout') {
+      return (
+        <Link
+          to="/"
+          onClick={() => props.logout()}
+          key={i}
+          className="nav__list-item"
+        >
+          {i}
+        </Link>
+      );
+    } else {
+      return (
+        <Link to={`/${i}`} key={i} className="nav__list-item">
+          {i}
+        </Link>
+      );
+    }
   });
   return (
     <nav className="nav">

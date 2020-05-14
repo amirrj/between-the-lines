@@ -19,11 +19,7 @@ const UserSchema = new Schema({
     required: true,
   },
   topics_following: {
-    type: [
-      {
-        topic: { type: String, required: true },
-      },
-    ],
+    type: [],
     default: [],
   },
   register_date: {

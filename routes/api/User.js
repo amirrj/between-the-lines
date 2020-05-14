@@ -8,6 +8,7 @@ const config = require('config');
 
 const validateRegister = require('../../validation/register');
 const User = require('../../models/User');
+const Topic = require('../../models/Topic');
 
 // @route POST /api/users
 // @desc register a new user
@@ -64,34 +65,33 @@ router.post('/', (req, res) => {
   });
 });
 
-// @route POST /api/users/topic
+// @route POST /api/users/topic/:topicId
 // @desc add a topic to user topics list
 // @access private
-router.post('/topic', auth, async (req, res) => {
-  const { topic } = req.body;
+router.post('/topic/:topicId', auth, async (req, res) => {
+  const id = req.params.topicId;
 
-  if (!topic) {
-    return res.status(400).json({ msg: 'Topic is required' });
-  }
+  await Topic.findById(id).then((topic) => {
+    User.findById(req.user.id).then((user) => {
+      if (!user) {
+        res.status(400).json({ msg: 'No user found, token may be invalid' });
+      }
 
-  User.findById(req.user.id).then((user) => {
-    if (!user) {
-      res.status(400).json({ msg: 'No user found, token may be invalid' });
-    }
+      const newTopic = {
+        topicId: topic.id,
+        topic: topic.topic,
+      };
 
-    // change to lowercase before adding into database
-    const LCTopic = topic.toLowerCase();
-
-    const newTopic = {
-      topic: LCTopic,
-    };
-
-    try {
-      user.topics_following.push(newTopic);
-      user.save().then((user) => res.json({ user: user }));
-    } catch (e) {
-      return res.status(400).json({ msg: 'Could not follow topic' });
-    }
+      try {
+        user.topics_following.push(newTopic);
+        topic.users_following.push(user.id);
+        topic.save().then((topic) => {
+          user.save().then((user) => res.json({ user: user, topic: topic }));
+        });
+      } catch (e) {
+        return res.status(400).json({ msg: 'Could not follow topic' });
+      }
+    });
   });
 });
 
@@ -101,26 +101,45 @@ router.post('/topic', auth, async (req, res) => {
 router.delete('/topic/:topicId', auth, async (req, res) => {
   const id = req.params.topicId;
 
-  if (!id) {
-    return res.status(400).json({ msg: 'Please provide a topic id' });
-  }
+  await Topic.findById(id)
+    .then((topic) => {
+      User.findById(req.user.id)
+        .then((user) => {
+          try {
+            // remove user from topic user following list
+            topic.users_following = topic.users_following.filter(
+              (topicUser) => user.id !== topicUser
+            );
 
-  User.findById(req.user.id).then(async (user) => {
-    if (!user) {
-      return res.status(400).json({
-        msg: 'Could not find user, token may be invalid',
-      });
-    }
+            // remove topic from users topic list
+            user.topics_following = user.topics_following.filter(
+              (userTopic) => topic.id !== userTopic.topicId
+            );
 
-    try {
-      user.topics_following = user.topics_following.filter(
-        (topic) => topic.id !== id
-      );
-      await user.save().then((user) => res.json(user));
-    } catch (e) {
-      return res.status(400).json({ msg: 'Could not delete topic' });
-    }
-  });
+            topic
+              .save()
+              .then((topic) => {
+                user
+                  .save()
+                  .then((user) => res.json({ user, topic }))
+                  .catch((err) => {
+                    return res.status(400).json({ msg: 'Could not save user' });
+                  });
+              })
+              .catch((err) => {
+                return res.status(400).json({ msg: 'could not save topic' });
+              });
+          } catch (err) {
+            return res.status(400).json({ msg: 'Could not remove topic' });
+          }
+        })
+        .catch((err) => {
+          return res.status(400).json({ msg: 'unable to find user' });
+        });
+    })
+    .catch((err) => {
+      return res.status(400).json({ msg: 'unable to find topic', error: err });
+    });
 });
 
 module.exports = router;

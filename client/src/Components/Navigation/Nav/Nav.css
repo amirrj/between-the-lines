@@ -8,8 +8,8 @@
 
 .nav__list-item {
   text-decoration: none;
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
   color: var(--color-black);
 }
 

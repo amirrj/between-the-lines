@@ -1,0 +1,25 @@
+.topics {
+  margin-top: 5rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.topics__title {
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-top: 1rem;
+}
+
+.topics__text {
+  font-size: 0.8rem;
+}
+
+@media (min-width: 768px) {
+  .topics {
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 5rem;
+  }
+}

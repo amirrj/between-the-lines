@@ -46,7 +46,9 @@ const MyArticles = (props) => {
         <Navigation />
         <div className="myArticles">
           <h1 className="myArticles__title">My Articles</h1>
-          <Link className="myArticles__button">Write your own story</Link>
+          <Link to="#" className="myArticles__button">
+            Write your own story
+          </Link>
           {posts.length ? (
             <React.Fragment>
               <PostCard posts={posts} edit openModal={openModalHandler} />

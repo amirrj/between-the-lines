@@ -12,6 +12,7 @@ import Home from './Pages/Home/Home';
 import Post from './Pages/Post/Post';
 import MyArticles from './Pages/MyArticles/MyArticles';
 import SearchArticles from './Pages/Search/Search';
+import Topics from './Pages/Topics/Topics';
 
 function App() {
   useEffect(() => {
@@ -30,6 +31,7 @@ function App() {
             <PrivateRoute path="/post/:postid" component={Post} exact />
             <PrivateRoute path="/myarticles" component={MyArticles} exact />
             <PrivateRoute path="/search" component={SearchArticles} exact />
+            <PrivateRoute path="/topics" component={Topics} exact />
           </Switch>
         </Router>
       </div>

@@ -1,0 +1,45 @@
+.topicCard {
+  margin: 1rem 0;
+  width: 60%;
+  background-color: var(--color-white);
+  text-align: center;
+  padding: 1rem;
+  position: relative;
+  cursor: pointer;
+
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.topicCard--following {
+  background-color: var(--color-green);
+  color: var(--color-white);
+}
+
+.topicCard__title {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.topicCard__following {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.5rem;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.topicCard__posts {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.topicCard:hover {
+  background-color: var(--color-green);
+  color: var(--color-white);
+}

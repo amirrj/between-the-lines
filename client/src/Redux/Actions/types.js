@@ -17,6 +17,11 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAIL = 'REGISTER_FAIL';
 
+// topic types
+export const TOPICS_LOADING = 'TOPICS_LOADING';
+export const GET_TOPICS = 'GET_TOPICS';
+export const FOLLOW_TOPIC = 'FOLLOW_TOPIC';
+
 // error types
 export const GET_ERRORS = 'GET_ERRORS';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';

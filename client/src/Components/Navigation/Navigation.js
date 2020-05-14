@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { logoutUser } from '../../Redux/Actions/AuthActions';
 
 import NavIcon from './NavIcon/NavIcon';
 import MobileNav from './MobileNav/MobileNav';
@@ -7,6 +10,7 @@ import LogoImage from '../../Assets/Between-the-lines-full-logo-2.png';
 import './Navigation.css';
 
 const Navigation = (props) => {
+  const dispatch = useDispatch();
   const [toggleNav, setToggleNav] = useState(false);
 
   const openNavHandler = () => {
@@ -17,6 +21,10 @@ const Navigation = (props) => {
     setToggleNav(false);
   };
 
+  const logOutHandler = () => {
+    dispatch(logoutUser());
+  };
+
   return (
     <div className="navigation">
       <div className="navigation__bar">
@@ -25,14 +33,18 @@ const Navigation = (props) => {
           src={LogoImage}
           alt="between the lines logo"
         />
-        <Nav />
+        <Nav logout={logOutHandler} />
         <NavIcon
           isOpen={toggleNav}
           openNav={openNavHandler}
           closeNav={closeNavHandler}
         />
       </div>
-      <MobileNav closeNav={closeNavHandler} isOpen={toggleNav} />
+      <MobileNav
+        logout={logOutHandler}
+        closeNav={closeNavHandler}
+        isOpen={toggleNav}
+      />
     </div>
   );
 };
