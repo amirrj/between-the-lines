@@ -24,9 +24,9 @@ const PostSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  topics: {
-    type: Array,
-    default: [],
+  topic: {
+    type: String,
+    required: true,
   },
   author: {
     type: Object,

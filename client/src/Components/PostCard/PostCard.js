@@ -16,7 +16,7 @@ const PostCard = (props) => {
           <div className="postCard__content">
             <h4 className="postCard__title">{post.title}</h4>
             <p className="postCard__desc">{post.description}</p>
-            <p className="postCard__topic">Topic: {post.topics}</p>
+            <p className="postCard__topic">Topic: {post.topic}</p>
             <p className="postCard__author">
               Written By {post.author.firstName} {post.author.lastName}
             </p>

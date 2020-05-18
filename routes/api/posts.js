@@ -4,6 +4,7 @@ const auth = require('../../middleware/auth');
 
 const Post = require('../../models/Post');
 const User = require('../../models/User');
+const Topic = require('../../models/Topic');
 const postsValidation = require('../../validation/posts');
 
 // @route POST /api/posts
@@ -33,6 +34,14 @@ router.post('/', auth, async (req, res) => {
   const topic = req.body.topic;
   const lowerCaseTopic = topic.toLowerCase();
 
+  // provide image when user has not provided one
+  const image = req.body.image
+    ? req.body.image
+    : `https://source.unsplash.com/daily?${topic}`;
+  const imageCaption = req.body.image
+    ? req.body.image__caption
+    : 'Random image provided from Unsplash.com';
+
   // change title to lowercase
   const title = req.body.title;
   const lowerCaseTitle = title.toLowerCase();
@@ -44,9 +53,9 @@ router.post('/', auth, async (req, res) => {
     title: lowerCaseTitle,
     description: req.body.description,
     article: displayArticle,
-    image: req.body.image,
-    image_caption: req.body.image_caption,
-    topics: lowerCaseTopic,
+    image: image,
+    image_caption: imageCaption,
+    topic: lowerCaseTopic,
     author: {
       user_id: author.id,
       firstName: author.firstName,
@@ -56,7 +65,16 @@ router.post('/', auth, async (req, res) => {
 
   await newPost
     .save()
-    .then((post) => res.json(post))
+    .then((post) => {
+      Topic.findOne({ topic: topic }).then((topic) => {
+        try {
+          topic.posts_related.push(post.id);
+          topic.save().then((topic) => res.json(post));
+        } catch (e) {
+          return res.json({ msg: 'could not add post to topics post list' });
+        }
+      });
+    })
     .catch((err) => console.log(err));
 });
 
@@ -68,7 +86,18 @@ router.delete('/:postid', auth, (req, res) => {
 
   Post.findByIdAndDelete(id, (err, post) => {
     if (err) throw err;
-    res.json(post);
+    Topic.findOne({ topic: post.topic }).then((topic) => {
+      try {
+        topic.posts_related = topic.posts_related.filter(
+          (postid) => postid !== post.id
+        );
+        topic.save().then((topic) => res.json(post));
+      } catch (e) {
+        return res
+          .status(400)
+          .json({ msg: 'Could not remove post from topic post list' });
+      }
+    });
   });
 });
 
@@ -94,7 +123,7 @@ router.get('/', auth, async (req, res) => {
     return topic.topic;
   });
 
-  await Post.find({ topics: { $in: userTopics } })
+  await Post.find({ topic: { $in: userTopics } })
     .sort({ post_date: -1 })
     .then((posts) => {
       res.json(posts);

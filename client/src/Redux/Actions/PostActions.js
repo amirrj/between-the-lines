@@ -6,6 +6,7 @@ import {
   GET_POST,
   POSTS_LOADING,
   DELETE_POST,
+  CREATE_POST,
   GET_ALL_POSTS,
 } from './types';
 import { returnErrors, clearErrors } from './ErrorActions';
@@ -47,6 +48,7 @@ export const getPostsByUser = (id) => (dispatch, getState) => {
     });
 };
 
+// get all posts
 export const getAllPosts = () => (dispatch, getState) => {
   // clear errors
   dispatch(clearErrors());
@@ -92,6 +94,23 @@ export const deletePost = (id) => (dispatch, getState) => {
     .delete(`/api/posts/${id}`, tokenConfig(getState))
     .then((res) => {
       dispatch({ type: DELETE_POST, payload: res.data });
+    })
+    .catch((err) => {
+      dispatch(returnErrors(err.response.data));
+    });
+};
+
+// create new post
+export const createPost = (postData, history) => (dispatch, getState) => {
+  //clear errors
+  dispatch(clearErrors());
+
+  //create new post
+  axios
+    .post('/api/posts', postData, tokenConfig(getState))
+    .then((res) => {
+      dispatch({ type: CREATE_POST, payload: res.data });
+      history.push('/myarticles');
     })
     .catch((err) => {
       dispatch(returnErrors(err.response.data));

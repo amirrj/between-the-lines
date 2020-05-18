@@ -40,7 +40,7 @@ const Post = (props) => {
           <div className="post__header">
             <h1 className="post__header-title">{post.title}</h1>
             <p className="post__header-desc">{post.description}</p>
-            <p className="post__header-topic">Topic: {post.topics}</p>
+            <p className="post__header-topic">Topic: {post.topic}</p>
             {post.author ? (
               <p className="post__header-author">
                 Written by {post.author.firstName} {post.author.lastName} <br />

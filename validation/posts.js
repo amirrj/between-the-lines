@@ -9,6 +9,7 @@ const postsValidation = (data) => {
   data.article = !isEmpty(data.article) ? data.article : '';
   data.image = !isEmpty(data.image) ? data.image : '';
   data.image_caption = !isEmpty(data.image_caption) ? data.image_caption : '';
+  data.topic = !isEmpty(data.topic) ? data.topic : '';
 
   if (isEmpty(data.title)) {
     errors.title = 'Please give this article a title';
@@ -28,6 +29,10 @@ const postsValidation = (data) => {
 
   if (!validator.isLength(data.image_caption, { max: 50 })) {
     errors.caption = 'Caption is too long. max 50 characters';
+  }
+
+  if (isEmpty(data.topic)) {
+    errors.topic = 'Topic is required';
   }
 
   return {

@@ -46,7 +46,7 @@ const MyArticles = (props) => {
         <Navigation />
         <div className="myArticles">
           <h1 className="myArticles__title">My Articles</h1>
-          <Link to="#" className="myArticles__button">
+          <Link to="/createarticle" className="myArticles__button">
             Write your own story
           </Link>
           {posts.length ? (
