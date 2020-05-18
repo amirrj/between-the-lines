@@ -149,7 +149,7 @@ const AuthForm = (props) => {
         password2,
       };
 
-      dispatch(registerUser(userData));
+      dispatch(registerUser(userData, props.history));
     }
   };
 
