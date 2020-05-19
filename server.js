@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const config = require('config');
 const path = require('path');
+const cors = require('cors');
 
 const app = express();
 app.use(
@@ -10,6 +11,7 @@ app.use(
   })
 );
 app.use(express.json());
+app.use(cors());
 
 const db = config.get('mongoURI');
 
