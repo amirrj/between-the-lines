@@ -22,7 +22,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "https://www.betweenthelines-project.com",
+  "proxy": "https://desolate-temple-97656.herokuapp.com",
   "eslintConfig": {
     "extends": "react-app"
   },
