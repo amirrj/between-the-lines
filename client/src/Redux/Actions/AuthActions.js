@@ -43,7 +43,7 @@ export const authenticateUser = (user, history) => (dispatch) => {
 
   // authenicate user
   axios
-    .post('/api/auth', user, config)
+    .post(`${process.env.REACT_APP_BACKEND_URL}/api/auth`, user, config)
     .then((res) => {
       dispatch({ type: LOGIN_SUCCESS, payload: res.data });
 
@@ -68,7 +68,7 @@ export const registerUser = (user, history) => (dispatch) => {
 
   // register user
   axios
-    .post('/api/users', user, config)
+    .post(`${process.env.REACT_APP_BACKEND_URL}/api/users`, user, config)
     .then((res) => {
       dispatch({ type: REGISTER_SUCCESS, payload: res.data });
 
