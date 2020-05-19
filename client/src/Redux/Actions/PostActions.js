@@ -21,7 +21,10 @@ export const getPostsByTopics = () => (dispatch, getState) => {
 
   // get posts by topic
   axios
-    .get('/api/posts', tokenConfig(getState))
+    .get(
+      `${process.env.REACT_APP_BACKEND_URL}/api/posts`,
+      tokenConfig(getState)
+    )
     .then((res) => {
       dispatch({ type: GET_POSTS_BY_TOPICS, payload: res.data });
     })
@@ -39,7 +42,10 @@ export const getPostsByUser = (id) => (dispatch, getState) => {
   dispatch({ type: POSTS_LOADING });
 
   axios
-    .get(`/api/posts/user`, tokenConfig(getState))
+    .get(
+      `${process.env.REACT_APP_BACKEND_URL}/api/posts/user`,
+      tokenConfig(getState)
+    )
     .then((res) => {
       dispatch({ type: GET_POSTS_BY_USER, payload: res.data });
     })
@@ -58,7 +64,10 @@ export const getAllPosts = () => (dispatch, getState) => {
 
   // get all posts
   axios
-    .get('/api/posts/all', tokenConfig(getState))
+    .get(
+      `${process.env.REACT_APP_BACKEND_URL}/api/posts/all`,
+      tokenConfig(getState)
+    )
     .then((res) => {
       dispatch({ type: GET_ALL_POSTS, payload: res.data });
     })
@@ -75,7 +84,10 @@ export const getPost = (id) => (dispatch, getState) => {
 
   //get post
   axios
-    .get(`/api/posts/post/${id}`, tokenConfig(getState))
+    .get(
+      `${process.env.REACT_APP_BACKEND_URL}/api/posts/post/${id}`,
+      tokenConfig(getState)
+    )
     .then((res) => {
       dispatch({ type: GET_POST, payload: res.data });
     })
@@ -91,7 +103,10 @@ export const deletePost = (id) => (dispatch, getState) => {
 
   // delete post
   axios
-    .delete(`/api/posts/${id}`, tokenConfig(getState))
+    .delete(
+      `${process.env.REACT_APP_BACKEND_URL}/api/posts/${id}`,
+      tokenConfig(getState)
+    )
     .then((res) => {
       dispatch({ type: DELETE_POST, payload: res.data });
     })
@@ -107,7 +122,11 @@ export const createPost = (postData, history) => (dispatch, getState) => {
 
   //create new post
   axios
-    .post('/api/posts', postData, tokenConfig(getState))
+    .post(
+      `${process.env.REACT_APP_BACKEND_URL}/api/posts`,
+      postData,
+      tokenConfig(getState)
+    )
     .then((res) => {
       dispatch({ type: CREATE_POST, payload: res.data });
       history.push('/myarticles');

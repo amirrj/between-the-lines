@@ -13,7 +13,10 @@ export const getTopics = () => (dispatch, getState) => {
 
   //get topics
   axios
-    .get('/api/topics', tokenConfig(getState))
+    .get(
+      `${process.env.REACT_APP_BACKEND_URL}/api/topics`,
+      tokenConfig(getState)
+    )
     .then((res) => {
       dispatch({ type: GET_TOPICS, payload: res.data });
     })
@@ -26,7 +29,11 @@ export const followTopic = (id) => (dispatch, getState) => {
   dispatch(clearErrors());
 
   axios
-    .post(`/api/users/topic/${id}`, {}, tokenConfig(getState))
+    .post(
+      `${process.env.REACT_APP_BACKEND_URL}/api/users/topic/${id}`,
+      {},
+      tokenConfig(getState)
+    )
     .then((res) => {
       dispatch(getTopics());
       dispatch(loadUser());
@@ -40,7 +47,10 @@ export const unFollowTopic = (id) => (dispatch, getState) => {
   dispatch(clearErrors());
 
   axios
-    .delete(`/api/users/topic/${id}`, tokenConfig(getState))
+    .delete(
+      `${process.env.REACT_APP_BACKEND_URL}/api/users/topic/${id}`,
+      tokenConfig(getState)
+    )
     .then((res) => {
       dispatch(getTopics());
       dispatch(loadUser());
