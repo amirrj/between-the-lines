@@ -18,7 +18,10 @@ export const loadUser = () => (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
 
   axios
-    .get('/api/auth/user', tokenConfig(getState))
+    .get(
+      `${process.env.REACT_APP_BACKEND_URL}/api/auth/user`,
+      tokenConfig(getState)
+    )
     .then((res) => dispatch({ type: USER_LOADED, payload: res.data }))
     .catch((err) => {
       dispatch(returnErrors(err.response.data));
